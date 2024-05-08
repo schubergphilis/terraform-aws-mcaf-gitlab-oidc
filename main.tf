@@ -42,7 +42,6 @@ module "oidc_role" {
 
   name                 = each.key
   assume_policy        = data.aws_iam_policy_document.assume_role_policy[each.key].json
-  create_policy        = true
   description          = each.value.description
   path                 = each.value.path
   permissions_boundary = each.value.permissions_boundary_arn
