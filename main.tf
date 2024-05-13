@@ -40,7 +40,7 @@ module "oidc_role" {
 
   for_each = var.iam_roles
 
-  name                 = each.key
+  name                 = each.value.name != null ? each.value.name : each.key
   assume_policy        = data.aws_iam_policy_document.assume_role_policy[each.key].json
   description          = each.value.description
   path                 = each.value.path

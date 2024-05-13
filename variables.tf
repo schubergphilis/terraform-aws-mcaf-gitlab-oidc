@@ -11,18 +11,20 @@ variable "gitlab_url" {
 
 variable "iam_roles" {
   type = map(object({
-    path                     = optional(string, "/")
     description              = optional(string, "Role assumed by the Gitlab IAM OIDC provider")
+    name                     = optional(string, null)
+    path                     = optional(string, "/")
     permissions_boundary_arn = optional(string, "")
-    policy_arns              = optional(set(string), [])
     policy                   = optional(string, null)
+    policy_arns              = optional(set(string), [])
+
     subject_filter_allowed = object({
       path     = string
       ref_type = string
       ref      = string
     })
   }))
-  description = "Configuration for IAM roles, the key of the map is used as the IAM role name."
+  description = "Configuration for IAM roles, the key of the map is used as the IAM role name. Unless overwritten by setting the name field."
 
   validation {
     condition     = alltrue([for o in var.iam_roles : can(regex("^(\\*|branch|tag)$", o.subject_filter_allowed.ref_type))])
