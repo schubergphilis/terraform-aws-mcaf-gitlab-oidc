@@ -1,7 +1,4 @@
 locals {
-  provider             = var.create_provider == true ? { instance = true } : {}
-  data_source_provider = var.create_provider == false ? { instance = true } : {}
-
   provider_arn = var.create_provider ? aws_iam_openid_connect_provider.gitlab["instance"].arn : data.aws_iam_openid_connect_provider.gitlab["instance"].arn
   provider_url = var.create_provider ? aws_iam_openid_connect_provider.gitlab["instance"].url : data.aws_iam_openid_connect_provider.gitlab["instance"].url
 }
@@ -13,13 +10,13 @@ data "tls_certificate" "gitlab" {
 }
 
 data "aws_iam_openid_connect_provider" "gitlab" {
-  for_each = local.data_source_provider
+  for_each = !var.create_provider ? { instance = true } : {}
 
   url = var.gitlab_url
 }
 
 resource "aws_iam_openid_connect_provider" "gitlab" {
-  for_each = local.provider
+  for_each = var.create_provider ? { instance = true } : {}
 
   url             = var.gitlab_url
   client_id_list  = [var.gitlab_url]
