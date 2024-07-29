@@ -30,6 +30,7 @@ variable "iam_roles" {
       ref      = string
     })
   }))
+  default     = {}
   description = "Configuration for IAM roles, the key of the map is used as the IAM role name. Unless overwritten by setting the name field."
 
   validation {
