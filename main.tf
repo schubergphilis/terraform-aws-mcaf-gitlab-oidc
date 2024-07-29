@@ -2,8 +2,8 @@ locals {
   provider             = var.create_provider == true ? { instance = true } : {}
   data_source_provider = var.create_provider == false ? { instance = true } : {}
 
-  provider_arn = var.create_provider ? aws_iam_openid_connect_provider.gitlab.arn : data.aws_iam_openid_connect_provider.gitlab.arn
-  provider_url = var.create_provider ? aws_iam_openid_connect_provider.gitlab.url : data.aws_iam_openid_connect_provider.gitlab.url
+  provider_arn = var.create_provider ? aws_iam_openid_connect_provider.gitlab["instance"].arn : data.aws_iam_openid_connect_provider.gitlab["instance"].arn
+  provider_url = var.create_provider ? aws_iam_openid_connect_provider.gitlab["instance"].url : data.aws_iam_openid_connect_provider.gitlab["instance"].url
 }
 
 # We avoid using https scheme because the Hashicorp TLS provider has started following redirects starting v4.
