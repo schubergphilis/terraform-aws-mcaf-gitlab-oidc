@@ -1,3 +1,9 @@
+variable "create_provider" {
+  type        = bool
+  default     = true
+  description = "Toggle to whether or not create the provider. Put to false to not create the provider but instead data source it and create roles only."
+}
+
 variable "gitlab_url" {
   type        = string
   default     = "https://gitlab.com"
@@ -24,6 +30,7 @@ variable "iam_roles" {
       ref      = string
     })
   }))
+  default     = {}
   description = "Configuration for IAM roles, the key of the map is used as the IAM role name. Unless overwritten by setting the name field."
 
   validation {
