@@ -2,6 +2,12 @@
 
 Terraform module to configure GitLab as an IAM OIDC identity provider in AWS.
 
+> [!WARNING]
+> This module is deprecated.
+> A submodule with the same functionality is now available as part of 
+> [`terraform-aws-mcaf-oidc`](https://registry.terraform.io/modules/schubergphilis/mcaf-oidc/aws/latest/submodules/gitlab).
+> Please refer to the [upgrade guide](https://github.com/schubergphilis/terraform-aws-mcaf-oidc/blob/main/UPGRADING.md) for migration instructions.
+
 IMPORTANT: We do not pin modules to versions in our examples. We highly recommend that in your code you pin the version to the exact version you are using so that your infrastructure remains stable.
 
 <!-- BEGIN_TF_DOCS -->
